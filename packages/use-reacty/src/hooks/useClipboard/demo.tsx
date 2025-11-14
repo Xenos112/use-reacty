@@ -38,7 +38,9 @@ export default function UseClipboard() {
             background: 'var(--vp-c-danger-soft)',
           }}
         >
-          An error occurred: {error.message}
+          An error occurred:
+          {' '}
+          {error.message}
         </div>
       )}
 
