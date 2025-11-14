@@ -53,6 +53,8 @@ interface UseClipboardReturn {
   text: string
   // Whether text was just copied
   copied: boolean
+  // Contains an error object if the last copy attempt failed
+  error: Error
 }
 ```
 
@@ -163,22 +165,30 @@ function CopyInput() {
 
 3. **Error Handling**
 
-   ```tsx
-   function SafeCopyWithFallback() {
-     const { copy, isSupported } = useClipboard()
+   The `useClipboard` hook includes an `error` state that will be updated if a synchronous error occurs during the copy attempt. You can monitor this state to display feedback to the user.
 
-     const handleCopy = async (text: string) => {
-       try {
-         await copy(text)
+   ```tsx
+   function SafeCopyWithFeedback() {
+     const { copy, error, isSupported } = useClipboard()
+
+     const handleCopy = (text: string) => {
+       if (!isSupported) {
+         alert('Clipboard API not supported. Please copy manually.')
+         return
        }
-       catch (err) {
-         console.error('Failed to copy:', err)
-         // Fallback to manual copy instruction
-         alert('Press Ctrl+C to copy')
-       }
+       copy(text)
      }
 
-     return <button onClick={() => handleCopy('text')}>Copy</button>
+     return (
+       <div>
+         <button onClick={() => handleCopy('text')}>Copy</button>
+         {error && error.message && (
+           <p style={{ color: 'red' }}>
+             Failed to copy: {error.message}
+           </p>
+         )}
+       </div>
+     )
    }
    ```
 

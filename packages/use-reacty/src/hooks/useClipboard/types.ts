@@ -3,6 +3,7 @@ export interface ReturnType {
   isSupported: boolean
   text: string
   copied: boolean
+  error: Error
 }
 
 export interface Options {

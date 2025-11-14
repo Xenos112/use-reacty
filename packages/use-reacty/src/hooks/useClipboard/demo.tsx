@@ -3,7 +3,7 @@ import { useClipboard } from 'use-reacty'
 
 export default function UseClipboard() {
   const [input, setInput] = useState('Try copying this text!')
-  const { copy, isSupported, copied, text } = useClipboard()
+  const { copy, isSupported, copied, text, error } = useClipboard()
 
   return (
     <div
@@ -23,10 +23,22 @@ export default function UseClipboard() {
             padding: '10px',
             borderRadius: '6px',
             background: 'var(--vp-c-danger-soft)',
-            marginBottom: '10px',
           }}
         >
           ⚠️ Clipboard API is not supported in your browser
+        </div>
+      )}
+
+      {error && error.message && (
+        <div
+          style={{
+            color: 'var(--vp-c-danger-1)',
+            padding: '10px',
+            borderRadius: '6px',
+            background: 'var(--vp-c-danger-soft)',
+          }}
+        >
+          An error occurred: {error.message}
         </div>
       )}
 
