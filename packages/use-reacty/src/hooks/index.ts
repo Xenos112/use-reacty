@@ -1,3 +1,4 @@
+export { default as useArray } from './useArray'
 export { default as useAsyncState } from './useAsyncState'
 export { default as useClipboard } from './useClipboard'
 export { default as useDraggable } from './useDraggable'
