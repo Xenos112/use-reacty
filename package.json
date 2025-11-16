@@ -6,7 +6,7 @@
     "docs:dev": "pnpm docs:gen && vitepress dev docs --port 3000",
     "docs:gen": "tsx ./scripts/docsGen.ts",
     "dev": "pnpm -r --parallel run \"/^(docs:dev|dev)$/\"",
-    "build": "pnpm docs:gen && vitepress build docs",
+    "build": "pnpm --filter use-reacty build && pnpm docs:gen && vitepress build docs",
     "preview": "vitepress preview docs",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
