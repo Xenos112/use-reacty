@@ -1,0 +1,59 @@
+name: Release & Deploy
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 1. BUILD the package before publishing
+      - name: Build package
+        run: |
+          cd packages/use-reacty
+          pnpm run build
+
+      # 2. Publish package to npm
+      - name: Publish package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd packages/use-reacty
+          pnpm publish --access public --no-git-checks
+
+      # 3. Build the VitePress website
+      - name: Build website
+        run: |
+          pnpm run build
+
+      # 4. Deploy to Vercel
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          vercel --prod --confirm --token $VERCEL_TOKEN
