@@ -17,7 +17,8 @@ function useUpdateEffect(callback: () => void, deps?: DependencyList) {
     }
 
     return callback()
-  }, deps)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...(deps ?? []), callback])
 }
 
 export default useUpdateEffect

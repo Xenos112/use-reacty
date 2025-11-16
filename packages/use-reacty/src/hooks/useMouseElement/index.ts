@@ -1,3 +1,4 @@
+/* eslint-disable react-web-api/no-leaked-event-listener */
 import type { RefObject } from 'react'
 import type { Coords } from '../useMouse/types'
 import { useEffect, useState } from 'react'
@@ -26,6 +27,7 @@ function useMouseElement<T extends HTMLElement>(
 
       return () => {
         ref.current!.removeEventListener('pointermove', onMove)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         ref.current!.removeEventListener('touchmove', onMove)
       }
     }

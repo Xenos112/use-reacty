@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-default-props */
 import type { UseDraggableProps } from './types'
 import {
   cleanup,

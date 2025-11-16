@@ -13,13 +13,13 @@ function useClipboard({
 }: Options = {}): ReturnType {
   const [copied, setCopied] = useState(false)
   const [text, setText] = useState('')
-  const [error, setError] = useState(new Error(''))
+  const [error, setError] = useState('')
   const isSupported = useSupported(() => 'clipboard' in navigator)
 
   const copy = (text: string) => {
     try {
       setCopied(true)
-      setError(new Error(''))
+      setError('')
 
       setTimeout(() => {
         setCopied(false)
@@ -34,7 +34,7 @@ function useClipboard({
     }
     catch (e) {
       setCopied(false)
-      setError(e as Error)
+      setError((e as Error).message)
     }
   }
 

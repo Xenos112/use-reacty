@@ -8,6 +8,16 @@ interface Task {
   completed: boolean
 }
 
+const secondaryButtonStyles: CSSProperties = {
+  background: 'var(--vp-c-bg)',
+  color: 'var(--vp-c-text-1)',
+  border: '1px solid var(--vp-c-divider)',
+  padding: '8px 14px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  fontSize: '0.9em',
+}
+
 const initialTasks: Task[] = [
   { id: 1, title: 'Draft release notes', completed: false },
   { id: 2, title: 'Review pull requests', completed: true },
@@ -218,7 +228,7 @@ export default function UseArrayDemo() {
       >
         <button
           type="button"
-          onClick={() => filter(task => !task.completed)}
+          onClick={() => filter(task => !task.completed as unknown as Task)}
           style={secondaryButtonStyles}
         >
           Filter Pending
@@ -234,14 +244,4 @@ export default function UseArrayDemo() {
       </div>
     </div>
   )
-}
-
-const secondaryButtonStyles: CSSProperties = {
-  background: 'var(--vp-c-bg)',
-  color: 'var(--vp-c-text-1)',
-  border: '1px solid var(--vp-c-divider)',
-  padding: '8px 14px',
-  borderRadius: '6px',
-  cursor: 'pointer',
-  fontSize: '0.9em',
 }

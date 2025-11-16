@@ -20,6 +20,7 @@ export default function UseEvent() {
     }}
     >
       <button
+        type="button"
         ref={buttonRef}
         style={{
           background: 'var(--vp-c-bg)',
@@ -36,7 +37,6 @@ export default function UseEvent() {
         Clicked
         {' '}
         {count}
-        {' '}
         {count === 1 ? 'time' : 'times'}
       </button>
 

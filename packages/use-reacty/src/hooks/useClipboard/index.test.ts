@@ -27,7 +27,7 @@ describe('useClipboard Hook', () => {
 
     expect(result.current.copied).toBe(false)
     expect(result.current.text).toBe('')
-    expect(result.current.error.message).toBe('')
+    expect(result.current.error).toBe('')
     expect(result.current.isSupported).toBe(true)
   })
 
@@ -43,7 +43,7 @@ describe('useClipboard Hook', () => {
 
     expect(result.current.copied).toBe(true)
     expect(result.current.text).toBe(textToCopy)
-    expect(result.current.error.message).toBe('')
+    expect(result.current.error).toBe('')
     expect(mockWriteText).toHaveBeenCalledWith(textToCopy)
     expect(onCopy).toHaveBeenCalledWith(textToCopy)
 
@@ -70,8 +70,7 @@ describe('useClipboard Hook', () => {
 
     expect(result.current.copied).toBe(false)
     expect(result.current.text).toBe('') // Text state should not be updated on error
-    expect(result.current.error).toBeInstanceOf(Error)
-    expect(result.current.error.message).toBe(errorMessage)
+    expect(result.current.error).toBe(errorMessage)
     // Note: writeText is still called in the current implementation before the error is thrown
     expect(mockWriteText).toHaveBeenCalledWith(textToCopy)
   })
@@ -88,7 +87,7 @@ describe('useClipboard Hook', () => {
     expect(result.current.isSupported).toBe(false)
     expect(mockWriteText).not.toHaveBeenCalled()
     expect(result.current.copied).toBe(true) // Optimistically set to true
-    expect(result.current.error.message).toBe('')
+    expect(result.current.error).toBe('')
 
     act(() => {
       vi.runAllTimers()

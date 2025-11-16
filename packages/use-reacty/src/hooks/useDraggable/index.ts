@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { Position, ReturnType, UseDraggableProps } from './types'
 import { useLayoutEffect, useRef, useState } from 'react'
 import getCoordinates from '../../utils/getCoordinates'
@@ -124,6 +125,7 @@ function useDraggable<T extends HTMLElement>({
       return () => {
         if (ref.current) {
           ref.current.removeEventListener('mousedown', handleStart)
+
           ref.current.removeEventListener('touchstart', handleStart)
         }
         document.removeEventListener('mousemove', handleMove)

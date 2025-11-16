@@ -1,31 +1,31 @@
-import { defineConfig } from "vitepress";
-import listHooks from "../../scripts/listHooks";
+import { defineConfig } from 'vitepress'
+import listHooks from '../../scripts/listHooks'
 
-const hooks = listHooks();
+const hooks = listHooks()
 
 export default defineConfig({
   vite: {
     resolve: {
-      dedupe: ["react", "react-dom"],
+      dedupe: ['react', 'react-dom'],
     },
   },
-  title: "Use Reacty",
-  description: "A collection of React hooks",
+  title: 'Use Reacty',
+  description: 'A collection of React hooks',
   themeConfig: {
     search: {
-      provider: "local",
+      provider: 'local',
     },
-    logo: "/logo.png",
-    nav: [{ text: "Home", link: "/" }],
+    logo: '/logo.png',
+    nav: [{ text: 'Home', link: '/' }],
     sidebar: [
       {
-        text: "Guide",
-        items: [{ text: "Getting Started", link: "/get-started" }],
+        text: 'Guide',
+        items: [{ text: 'Getting Started', link: '/get-started' }],
       },
       {
-        text: "Hooks",
+        text: 'Hooks',
         items: [
-          ...hooks.map((hook) => ({
+          ...hooks.map(hook => ({
             text: hook,
             link: `/hooks/${hook}`,
           })),
@@ -33,8 +33,8 @@ export default defineConfig({
       },
     ],
     footer: {
-      message: "made with ❤️ by Xenos",
-      copyright: "",
+      message: 'made with ❤️ by Xenos',
+      copyright: '',
     },
   },
-});
+})

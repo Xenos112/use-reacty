@@ -53,8 +53,8 @@ interface UseClipboardReturn {
   text: string
   // Whether text was just copied
   copied: boolean
-  // Contains an error object if the last copy attempt failed
-  error: Error
+  // Contains an error message if the last copy attempt failed
+  error: string
 }
 ```
 
@@ -182,9 +182,9 @@ function CopyInput() {
      return (
        <div>
          <button onClick={() => handleCopy('text')}>Copy</button>
-         {error && error.message && (
+         {error && (
            <p style={{ color: 'red' }}>
-             Failed to copy: {error.message}
+             Failed to copy: {error}
            </p>
          )}
        </div>
